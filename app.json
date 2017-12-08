@@ -1,0 +1,21 @@
+{
+  "name": "Agora Web SDK Quickstart",
+  "description": "One-click to deploy sample 1-to-1 communications demo app built from Agora Web SDK",
+  "keywords": [
+    "Agora",
+    "Agora.io",
+    "video",
+    "voice",
+    "communications",
+    "webrtc",
+    "web"
+  ],
+  "website": "http://www.agora.io",
+  "repository": "https://github.com/jamfang/Agora-Web-Tutorial-1to1",
+  "env": {
+    "APP_ID": {
+      "description": "Agora.io App ID: Login to the Agora.io Developer Dashboard (http://dashboard.agora.io), and navigate to the \"Projects\" tab to get this value",
+      "required": true
+    }
+  }
+}
