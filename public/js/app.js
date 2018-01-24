@@ -39,6 +39,7 @@ function joinChannel() {
     initializeLocalStream(); // Tutorial Step 3
     registerStreamAddedEventHandler(); // Tutorial Step 6
     registerStreamRemovedEventHandler(); // Tutorial Step 8
+    registerPeerMuteAudioVideoEventHandler(); // Tutorial Step 13
 
   }, function(err) {
       console.log("Join channel failed", err);
@@ -105,6 +106,7 @@ function subscribeRemoteStream() {
   client.on('stream-subscribed', function (evt) {
     remoteStream = evt.stream;
     console.log("Subscribed to remote stream successfully: " + remoteStream.getId());
+    
     renderRemoteStream(); // Tutorial Step 8
   });
 }
@@ -134,7 +136,6 @@ function registerStreamRemovedEventHandler() {
 function onEndCallButtonClicked() {
   localStream.stop();
   localStream.close();
-  resetButtons();
 
   client.leave(function () {
     console.log("Leave channel succeeded");
@@ -165,4 +166,24 @@ function onVideoMuteButtonClicked() {
     localStream.enableVideo();
     document.getElementById('video-mute-button').src="images/cameraoff.png";
   }
+}
+
+// Tutorial Step 13
+function registerPeerMuteAudioVideoEventHandler() {
+  client.on('mute-audio', function(evt) {
+    var peeruid = evt.uid;
+    console.log("mute audio:" + peeruid);
+  });
+  client.on('unmute-audio', function (evt) {
+    var peeruid = evt.uid;
+    console.log("unmute audio:" + peeruid);
+  });
+    client.on('mute-video', function (evt) {
+    var peeruid = evt.uid;
+    console.log("mute video" + peeruid);
+  });
+  client.on('unmute-video', function (evt) {
+    var peeruid = evt.uid;
+    console.log("unmute video:" + peeruid);
+  });
 }
