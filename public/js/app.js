@@ -1,4 +1,4 @@
-var client, uid, localStream, remoteStream, screenSharingStream, camera, microphone;
+var client, localuid, localStream, remoteStream, screenSharingStream, camera, microphone;
 var audioMute = false;
 var videoMute = false;
 
@@ -33,8 +33,9 @@ function joinChannel() {
   var channel_name = "demoChannel1";
 
   client.join(null, channel_name, null, function(uid) {
+    localuid = uid;
   // Join channel "demoChannel1"
-    console.log("Uid: " + uid + " joined channel: " + channel_name + " successfully");
+    console.log("Uid: " + localuid + " joined channel: " + channel_name + " successfully");
 
     initializeLocalStream(); // Tutorial Step 3
     registerStreamAddedEventHandler(); // Tutorial Step 6
@@ -48,7 +49,7 @@ function joinChannel() {
 
 // Tutorial Step 3
 function initializeLocalStream() {
-  localStream = AgoraRTC.createStream({streamID: uid, audio: true, video: true, screen: false});
+  localStream = AgoraRTC.createStream({streamID: localuid, audio: true, video: true, screen: false});
   localStream.setVideoProfile('720p_3');
 
   localStream.init(function() {
